@@ -1,12 +1,11 @@
 from alpine
 MAINTAINER Sander <mail@sandervanvugt.nl>
 
-# Add repo file
-ADD ./README.txt /README.txt
 
 # Install cool software
-RUN     apk add bash nmap
+RUN     apk add curl git && \
+	curl -LO https://dl.k8s.io/release/v1.26.0/linux/amd64/kubectl && \
+	cp kubectl /usr/local/bin/kubectl &&  \
+	chmod +x /usr/local/bin/kubectl
 
-ENTRYPOINT ["/usr/bin/nmap"]
-CMD ["-sn", "172.17.0.0/24"]
 
